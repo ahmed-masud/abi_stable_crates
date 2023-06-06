@@ -1,4 +1,4 @@
-[![Rust](https://github.com/rodrimati1992/abi_stable_crates/workflows/Rust/badge.svg)](https://github.com/rodrimati1992/abi_stable_crates/actions) [![Join the chat at https://gitter.im/abi_stable_crates/community](https://badges.gitter.im/abi_stable_crates/community.svg)](https://gitter.im/abi_stable_crates/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Rust](https://github.com/ahmed-masud/abi_stable_crates/workflows/Rust/badge.svg)](https://github.com/ahmed-masud/abi_stable_crates/actions) [![Join the chat at https://gitter.im/abi_stable_crates/community](https://badges.gitter.im/abi_stable_crates/community.svg)](https://gitter.im/abi_stable_crates/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![](https://img.shields.io/crates/v/abi_stable.svg)][crates-io]
 [![api-docs](https://docs.rs/abi_stable/badge.svg)][Documentation]
 
@@ -10,17 +10,17 @@ For Rust-to-Rust ffi,
 with a focus on creating libraries loaded at program startup,
 and with load-time type-checking.
 
-This library allows defining Rust libraries that can be loaded at runtime. 
+This library allows defining Rust libraries that can be loaded at runtime.
 This isn't possible with the default (Rust) ABI and representation, since it's unstable.
 
 These are some usecases for this library:
-    
+
 - Converting a Rust dependency tree from compiling statically into a single binary,
     into one binary (and potentially) many dynamic libraries,
     allowing separate re-compilation on changes.
 
 - Creating a plugin system (without support for unloading).
-    
+
 # Features
 
 Currently this library has these features:
@@ -55,7 +55,7 @@ The changelog is in the "Changelog.md" file.
 
 # Example crates
 
-For **example crates** using `abi_stable` you can look at the 
+For **example crates** using `abi_stable` you can look at the
 crates in the examples directory, in the repository for this crate.
 
 To run the example crates you'll generally have to build the `*_impl` crate,
@@ -236,10 +236,10 @@ pub trait Appender {
     /// The element type of the collection.
     type Element;
 
-    /// Appends one element at the end of the collection.    
+    /// Appends one element at the end of the collection.
     fn push(&mut self, value: Self::Element);
 
-    /// Appends many elements at the end of the collection.    
+    /// Appends many elements at the end of the collection.
     fn append(&mut self, vec: RVec<Self::Element>);
 
     /// Converts this collection into an `RVec`.
@@ -397,7 +397,7 @@ pub fn new_appender() -> AppenderBox<u32> {
     - Have a type that implements `std::anu::Any`
     (it requires that the type doesn't borrow anything).
 
-    - Pass `TD_CanDowncast` instead of `TD_Opaque` to 
+    - Pass `TD_CanDowncast` instead of `TD_Opaque` to
     `Appender_TO::{from_const, from_value,from_ptr}`.
 
     - Unerase the trait object back into the original type with
@@ -457,7 +457,7 @@ impl<T> Appender for RVec<T> {
 This library ensures that the loaded libraries are safe to use through these mechanisms:
 
 - The abi_stable ABI of the library is checked,
-    Each `0.y.0` version and `x.0.0` version of abi_stable defines its own ABI 
+    Each `0.y.0` version and `x.0.0` version of abi_stable defines its own ABI
     which is incompatible with previous versions.
 
 - Types are recursively checked when the dynamic library is loaded,
@@ -473,7 +473,7 @@ None right now.
 # Non-features (extremely unlikely to be added)
 
 Supporting library unloading,
-since this requires building the entire library with the assumption that anything 
+since this requires building the entire library with the assumption that anything
 might get unloaded at any time.
 
 # Architecture
@@ -481,7 +481,7 @@ might get unloaded at any time.
 
 This is a way that users can structure their libraries to allow for dynamic linking.
 
-For how to evolve dynamically loaded libraries loaded using the safe API in abi_stable 
+For how to evolve dynamically loaded libraries loaded using the safe API in abi_stable
 [look here](https://docs.rs/abi_stable/*/abi_stable/docs/library_evolution/index.html).
 
 ### Interface crate
@@ -539,7 +539,7 @@ These are default cargo features that enable optional crates :
 
 - "serde_json":
     Depends on `serde_json`,
-    providing ffi-safe equivalents of 
+    providing ffi-safe equivalents of
     `&serde_json::value::RawValue` and `Box<serde_json::value::RawValue>`,
     in `abi_stable::external_types::serde_json` .
 
